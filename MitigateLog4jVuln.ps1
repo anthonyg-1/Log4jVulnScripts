@@ -143,4 +143,6 @@ foreach ($driveLetter in $drives) {
     }
 }
 
+Write-Verbose ("Finished searching the following drives: {0}" -f ($drives -join ", ")) -Verbose
+
 #endregion
