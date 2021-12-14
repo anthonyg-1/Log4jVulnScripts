@@ -70,9 +70,16 @@ function Get-SolrServiceDetail {
         Write-Error -Exception $FileNotFoundException -ErrorAction Stop
     }
 
-    $exePath = $targetService.PathName -replace '"', ""
-    $solrVersion = (Get-Item -Path $exePath).VersionInfo.FileVersion
-    $solServiceName = $targetService.Name
+    $solServiceName = ""
+    $solrVersion = 0.0
+    try {
+        $exePath = $targetService.PathName -replace '"', ""
+        $solrVersion = (Get-Item -Path $exePath -ErrorAction Stop).VersionInfo.FileVersion
+        $solServiceName = $targetService.Name
+    }
+    catch {
+        Write-Error -Exception $_.Exception -ErrorAction Stop
+    }
 
     return $([PSCustomObject]@{ServiceName = $solServiceName; ServiceVersion = $solrVersion })
 }
@@ -81,6 +88,13 @@ function Get-SolrServiceDetail {
 
 
 #region Checks
+
+# Determine if OS is Windows and if not, throw terminating exception:
+[bool]$isMicrosoftWindows = $env:OS -like "*Windows*"
+if (-not($isMicrosoftWindows)) {
+    $NotSupportedException = New-Object -TypeName NotSupportedException -ArgumentList "This script is only supported on Microsoft Windows operating systems."
+    Write-Error -Exception $NotSupportedException -Category NotImplemented -ErrorAction Stop
+}
 
 # If minimum version is not met, throw a terminating exception:
 if ((Get-SolrServiceDetail).ServiceVersion -le $targetFileVersionMinimum) {
