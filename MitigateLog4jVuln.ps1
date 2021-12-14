@@ -17,9 +17,6 @@ Param
 
 #region Configuration Values
 
-# Determines if we are going to restart the SOLR service when executed. Default value is false:
-[bool]$RestartService = $false
-
 # The file that we will attempt to write to:
 [string]$targetFileName = "solr.in.cmd"
 
