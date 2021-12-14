@@ -14,10 +14,10 @@ Requires PowerShell 4 or above.
 ### Usage
 #### Mitigation
 ```powershell
-# Searches all drives for solr.in.cmd and applies mitigation without restarting the service:
+# Searches all file system drives for solr.in.cmd and applies mitigation without restarting the service:
 .\MitigateLog4jVuln.ps1
 
-# Searches all drives for solr.in.cmd, applies mitigation, and restarts service:
+# Searches all file system drives for solr.in.cmd, applies mitigation, and restarts service:
 .\MitigateLog4jVuln.ps1 -RestartService
 
 # Searches only the E: drive for solr.in.cmd, applies mitigation, and restarts service:
@@ -25,5 +25,6 @@ Requires PowerShell 4 or above.
 ```
 #### Detection
 ```powershell
+# Searches all file system drives for solr.in.cmd and determines if mitigation needs to be applied.
 .\DetectLog4jVuln.ps1
 ```
