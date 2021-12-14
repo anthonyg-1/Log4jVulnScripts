@@ -45,7 +45,7 @@ foreach ($driveLetter in $drives) {
         Write-Warning "Found $targetFileName in $targetDirectory. Determining if mitigation needs to be applied..." -Verbose
 
         foreach ($foundFile in $targetFiles) {
-            [bool]$fileIsPatched = $false
+            [bool]$mitigationDetected = $false
 
             $filePath = $foundFile.FullName
 
@@ -53,11 +53,11 @@ foreach ($driveLetter in $drives) {
                 $fileContent = Get-Content -Path $filePath -Raw -ErrorAction Stop
 
                 if ($fileContent -match $mitigation) {
-                    $fileIsPatched = $true
+                    $mitigationDetected = $true
                     Write-Verbose "Mitigation already applied on $filePath." -Verbose
                 }
                 else {
-                    Write-Warning "Mitigation not currently applied on $filePath."
+                    Write-Warning "File found. Mitigation not currently applied on $filePath."
                 }
             }
             catch {
