@@ -21,3 +21,7 @@ Requires PowerShell 4 or above.
 # Searches only the E: drive for solr.in.cmd, applies mitigation, and restarts service:
 .\MitigateLog4jVuln.ps1 -DriveLetter E -RestartService
 ```
+#### Detection
+```powershell
+.\DetectLog4jVuln.ps1
+```
