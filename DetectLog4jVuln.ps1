@@ -21,15 +21,17 @@ foreach ($driveLetter in $drives) {
 
     $targetFiles = Get-Childitem -Path $targetDrive -Include $targetFileName -Recurse -File -ErrorAction SilentlyContinue
 
+    $targetDirectory = $targetFiles.DirectoryName
+
     if ($targetFiles.Count -gt 0) {
-        Write-Warning "Found $targetFileName. Determining if mitigation needs to be applied..." -Verbose
+        Write-Warning "Found $targetFileName in $targetDirectory. Determining if mitigation needs to be applied..." -Verbose
 
         foreach ($foundFile in $targetFiles) {
             [bool]$fileIsPatched = $false
 
-            try {
-                $filePath = $foundFile.FullName
+            $filePath = $foundFile.FullName
 
+            try {
                 $fileContent = Get-Content -Path $filePath -Raw -ErrorAction Stop
 
                 if ($fileContent -match $mitigation) {
@@ -37,7 +39,7 @@ foreach ($driveLetter in $drives) {
                     Write-Verbose "$filePath is already patched. No action taken." -Verbose
                 }
                 else {
-                    Write-Warning "Mitigation not currently applied."
+                    Write-Warning "Mitigation not currently applied on $filePath."
                 }
             }
             catch {
@@ -47,4 +49,4 @@ foreach ($driveLetter in $drives) {
     }
 }
 
-Write-Verbose ("Finished searching the following drives: {0}" -f ($drives -join ",")) -Verbose
+Write-Verbose ("Finished searching the following drives: {0}" -f ($drives -join ", ")) -Verbose
