@@ -10,6 +10,7 @@ Use at your own risk, optimally in a test environment before attempting to execu
 Requires PowerShell 4 or above.
 
 ### Usage
+#### Mitigation
 ```powershell
 # Searches all drives for solr.in.cmd and applies mitigation without restarting the service:
 .\MitigateLog4jVuln.ps1
