@@ -13,7 +13,6 @@
         https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228
         https://blog.malwarebytes.com/exploits-and-vulnerabilities/2021/12/log4j-zero-day-log4shell-arrives-just-in-time-to-ruin-your-weekend/
         https://github.com/anthonyg-1/Log4jVulnScripts
-
 #>
 
 #requires -RunAsAdministrator
