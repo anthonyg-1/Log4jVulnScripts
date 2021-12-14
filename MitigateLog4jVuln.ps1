@@ -96,7 +96,7 @@ foreach ($driveLetter in $drives) {
             try {
                 $filePath = $foundFile.FullName
 
-                $fileContent = Get-Content -Path $filePath -Raw
+                $fileContent = Get-Content -Path $filePath -Raw -ErrorAction Stop
 
                 if ($fileContent -match $mitigation) {
                     $fileIsPatched = $true
@@ -106,14 +106,14 @@ foreach ($driveLetter in $drives) {
                     Write-Warning "Mitigation not currently applied. Applying mitigation to the following file: $filePath"
 
                     # Add a carriage return, REM line (comment), and the mitigation:
-                    Add-Content -Path $filePath -Value "`r`n"
-                    Add-Content -Path $filePath -Value "REM log4j vulnerability mitigation:"
-                    Add-Content -Path $filePath -Value $mitigation -Verbose
+                    Add-Content -Path $filePath -Value "`r`n" -ErrorAction Stop
+                    Add-Content -Path $filePath -Value "REM log4j vulnerability mitigation:" -ErrorAction Stop
+                    Add-Content -Path $filePath -Value $mitigation -Verbose -ErrorAction Stop
 
                     if ($PSBoundParameters.ContainsKey("RestartService")) {
                         if (-not($fileIsPatched)) {
                             Write-Verbose "Restarting the $serviceName service" -Verbose
-                            Restart-Service -Name $serviceName -Force -Verbose
+                            Restart-Service -Name $serviceName -Force -Verbose -ErrorAction Stop
                         }
                     }
                     else {
