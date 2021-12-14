@@ -1,3 +1,33 @@
+<#
+    .SYNOPSIS
+        MitigateLog4jVuln.ps1
+    .DESCRIPTION
+        This PowerShell script serves to detect and mitigate CVE-2021-44228 (Log4j vulnerability) on Windows systems.
+    .PARAMETER DriveLetter
+        The drive letter containing the target file to be modified. Note that if no drive letter is passed, all drives are searched.
+    .PARAMETER RestartService
+        Tells the script to restart the discovered SOLR service.
+    .EXAMPLE
+        \MitigateLog4jVuln.ps1
+
+        Searches all drives for solr.in.cmd and applies mitigation without restarting the service.
+    .EXAMPLE
+        .\MitigateLog4jVuln.ps1 -RestartService
+
+        Searches all drives for solr.in.cmd, applies mitigation, and restarts service.
+    .EXAMPLE
+        .\MitigateLog4jVuln.ps1 -DriveLetter E -RestartService
+
+        Searches only the E: drive for solr.in.cmd, applies mitigation, and restarts service.
+    .NOTES
+        This mitigation applies only to Log4j version 2.10 or higher. Requires administrative privileges and PowerShell version 4.0 or higher.
+    .LINK
+        https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228
+        https://blog.malwarebytes.com/exploits-and-vulnerabilities/2021/12/log4j-zero-day-log4shell-arrives-just-in-time-to-ruin-your-weekend/
+        https://github.com/anthonyg-1/Log4jVulnScripts
+
+#>
+
 #requires -RunAsAdministrator
 #requires -Version 4
 
