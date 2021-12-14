@@ -66,12 +66,23 @@ if ((Get-SolrServiceDetail).ServiceVersion -le $targetFileVersionMinimum) {
 #region Main
 
 # If a drive is specified use that else search all:
+
+$detectedDrives = Get-PSDrive | Where-Object { $_.Provider.Name -like "*File*" } | Select-Object -ExpandProperty Name
+
 $drives = @()
 if ($PSBoundParameters.ContainsKey("DriveLetter")) {
-    $drives += $DriveLetter
+
+    if ($DriveLetter -in $detectedDrives) {
+        $drives += $DriveLetter
+    }
+    else {
+        $argumentExceptionMessage = "{0} drive not found on this computer. " -f $DriveLetter
+        $ArgumentException = New-Object -TypeName ArgumentException -ArgumentList $argumentExceptionMessage
+        Write-Error -Exception $ArgumentException -ErrorAction Stop
+    }
 }
 else {
-    $drives = Get-PSDrive | Where-Object { $_.Provider.Name -like "*File*" } | Select-Object -ExpandProperty Name
+    $drives = $detectedDrives
 }
 
 # Get the service name:
