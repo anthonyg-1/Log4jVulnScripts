@@ -6,10 +6,10 @@
 Param
 (
     # If no drive is specified, all are searched:
-    [Parameter(Mandatory = $false, Position = 1)][ValidateSet("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")][String]$DriveLetter = "C",
+    [Parameter(Mandatory = $false, Position = 0)][ValidateSet("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")][String]$DriveLetter = "C",
 
     # Determines if we are going to restart the SOLR service when executed. Default value is false:
-    [Parameter(Mandatory = $false, Position = 0)][Switch]$RestartService
+    [Parameter(Mandatory = $false, Position = 1)][Switch]$RestartService
 )
 
 #endregion
