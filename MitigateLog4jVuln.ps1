@@ -135,7 +135,7 @@ foreach ($driveLetter in $drives) {
         Write-Verbose "Found $targetFileName. Determining if mitigation needs to be applied..." -Verbose
 
         foreach ($foundFile in $targetFiles) {
-            [bool]$fileIsPatched = $false
+            [bool]$mitigationDetected = $false
 
             $filePath = $foundFile.FullName
 
@@ -143,7 +143,7 @@ foreach ($driveLetter in $drives) {
                 $fileContent = Get-Content -Path $filePath -Raw -ErrorAction Stop
 
                 if ($fileContent -match $mitigation) {
-                    $fileIsPatched = $true
+                    $mitigationDetected = $true
                     Write-Verbose "$filePath is already patched. No action taken." -Verbose
                 }
                 else {
@@ -155,7 +155,7 @@ foreach ($driveLetter in $drives) {
                     Add-Content -Path $filePath -Value $mitigation -Verbose -ErrorAction Stop
 
                     if ($PSBoundParameters.ContainsKey("RestartService")) {
-                        if (-not($fileIsPatched)) {
+                        if (-not($mitigationDetected)) {
                             Write-Verbose "Restarting the $serviceName service" -Verbose
 
                             if (-not($serviceHasBeenRestarted)) {
