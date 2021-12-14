@@ -127,6 +127,7 @@ foreach ($driveLetter in $drives) {
                     if ($PSBoundParameters.ContainsKey("RestartService")) {
                         if (-not($fileIsPatched)) {
                             Write-Verbose "Restarting the $serviceName service" -Verbose
+
                             if (-not($serviceHasBeenRestarted)) {
                                 Restart-Service -Name $serviceName -Force -Verbose -ErrorAction Stop
                                 $serviceHasBeenRestarted = $true
