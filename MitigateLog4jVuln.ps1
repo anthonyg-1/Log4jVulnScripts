@@ -75,7 +75,7 @@ if ($PSBoundParameters.ContainsKey("DriveLetter")) {
         $drives += $DriveLetter
     }
     else {
-        $argumentExceptionMessage = "{0} drive not found on this computer. " -f $DriveLetter
+        $argumentExceptionMessage = "$DriveLetter drive not found on this computer."
         $ArgumentException = New-Object -TypeName ArgumentException -ArgumentList $argumentExceptionMessage
         Write-Error -Exception $ArgumentException -ErrorAction Stop
     }
@@ -89,6 +89,9 @@ $serviceName = (Get-SolrServiceDetail).ServiceName
 
 # Clear console between each run:
 Clear-Host
+
+# Determine if service has been restarted once during this run. The intent is to restart the service only once:
+[bool]$serviceHasBeenRestarted = $false
 
 # Iterate through each drive on the system, find the target files, and apply fix. Optionally restart the service as specified in the $RestartService variable at the top of this script:
 foreach ($driveLetter in $drives) {
@@ -124,7 +127,10 @@ foreach ($driveLetter in $drives) {
                     if ($PSBoundParameters.ContainsKey("RestartService")) {
                         if (-not($fileIsPatched)) {
                             Write-Verbose "Restarting the $serviceName service" -Verbose
-                            Restart-Service -Name $serviceName -Force -Verbose -ErrorAction Stop
+                            if (-not($serviceHasBeenRestarted)) {
+                                Restart-Service -Name $serviceName -Force -Verbose -ErrorAction Stop
+                                $serviceHasBeenRestarted = $true
+                            }
                         }
                     }
                     else {
