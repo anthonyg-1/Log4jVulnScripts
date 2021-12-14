@@ -66,7 +66,6 @@ if ((Get-SolrServiceDetail).ServiceVersion -le $targetFileVersionMinimum) {
 #region Main
 
 # If a drive is specified use that else search all:
-
 $detectedDrives = Get-PSDrive | Where-Object { $_.Provider.Name -like "*File*" } | Select-Object -ExpandProperty Name
 
 $drives = @()
