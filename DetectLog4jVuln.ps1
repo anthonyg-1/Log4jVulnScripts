@@ -18,6 +18,13 @@
 #requires -RunAsAdministrator
 #requires -Version 4
 
+# Determine if OS is Windows and if not, throw terminating exception:
+[bool]$isMicrosoftWindows = $env:OS -like "*Windows*"
+if (-not($isMicrosoftWindows)) {
+    $NotSupportedException = New-Object -TypeName NotSupportedException -ArgumentList "This script is only supported on Microsoft Windows operating systems."
+    Write-Error -Exception $NotSupportedException -Category NotImplemented -ErrorAction Stop
+}
+
 # The file that we will attempt to find:
 $targetFileName = "solr.in.cmd"
 
