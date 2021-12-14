@@ -90,6 +90,7 @@ foreach ($driveLetter in $drives) {
 
     if ($targetFiles.Count -gt 0) {
         Write-Verbose "Found $targetFileName. Determining if mitigation needs to be applied..." -Verbose
+
         foreach ($foundFile in $targetFiles) {
             [bool]$fileIsPatched = $false
 
