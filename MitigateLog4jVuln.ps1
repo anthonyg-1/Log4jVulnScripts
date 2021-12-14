@@ -94,9 +94,9 @@ foreach ($driveLetter in $drives) {
         foreach ($foundFile in $targetFiles) {
             [bool]$fileIsPatched = $false
 
-            try {
-                $filePath = $foundFile.FullName
+            $filePath = $foundFile.FullName
 
+            try {
                 $fileContent = Get-Content -Path $filePath -Raw -ErrorAction Stop
 
                 if ($fileContent -match $mitigation) {
