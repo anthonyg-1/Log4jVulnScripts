@@ -18,10 +18,10 @@ Param
 #region Configuration Values
 
 # The file that we will attempt to write to:
-[string]$targetFileName = "solr.in.cmd"
+$targetFileName = "solr.in.cmd"
 
 # Entry to add to target file:
-[string]$mitigation = "set SOLR_OPTS=%SOLR_OPTS% -Dlog4j2.formatMsgNoLookups=true"
+$mitigation = "set SOLR_OPTS=%SOLR_OPTS% -Dlog4j2.formatMsgNoLookups=true"
 
 # Minimum version that this mitigation requires:
 $targetFileVersionMinimum = 2.15
