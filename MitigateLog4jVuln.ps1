@@ -23,8 +23,8 @@ $targetFileName = "solr.in.cmd"
 # Entry to add to target file:
 $mitigation = "set SOLR_OPTS=%SOLR_OPTS% -Dlog4j2.formatMsgNoLookups=true"
 
-# Minimum version that this mitigation requires:
-$targetFileVersionMinimum = 2.15
+# Minimum version that this mitigation requires (per https://blog.malwarebytes.com/exploits-and-vulnerabilities/2021/12/log4j-zero-day-log4shell-arrives-just-in-time-to-ruin-your-weekend/):
+$targetFileVersionMinimum = 2.10
 
 #endregion
 
@@ -85,7 +85,7 @@ else {
 }
 
 # Get the service name:
-$serviceName = (Get-SolrServiceDetail).ServiceName
+$serviceName = Get-SolrServiceDetail | Select-Object -ExpandProperty ServiceName
 
 # Clear console between each run:
 Clear-Host
