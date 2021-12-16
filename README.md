@@ -1,6 +1,6 @@
 # Log4jVulnScripts
 
-This repository contains PowerShell scripts that serve to detect and mitigate CVE-2021-44228 (Log4j vulnerability) on Windows systems per the steps outlined in the following: https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228. 
+This repository contains PowerShell scripts that serve to detect and mitigate CVE-2021-44228 (Log4j vulnerability) on Windows systems with Sitecore installed per the steps outlined in the following: https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228. 
 
 Note that this mitigation applies only to Log4j version 2.10 or higher. More on that here: https://blog.malwarebytes.com/exploits-and-vulnerabilities/2021/12/log4j-zero-day-log4shell-arrives-just-in-time-to-ruin-your-weekend/
 
