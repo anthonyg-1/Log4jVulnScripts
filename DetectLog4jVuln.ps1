@@ -2,7 +2,7 @@
     .SYNOPSIS
         DetectLog4jVuln.ps1
     .DESCRIPTION
-        This PowerShell script serves to detect CVE-2021-44228 (Log4j vulnerability) on Windows systems.
+        This PowerShell script serves to detect CVE-2021-44228 (Log4j vulnerability) on Windows systems with Sitecore installed.
     .EXAMPLE
         .\DetectLog4jVuln.ps1
 
