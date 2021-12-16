@@ -2,7 +2,7 @@
     .SYNOPSIS
         MitigateLog4jVuln.ps1
     .DESCRIPTION
-        This PowerShell script serves to detect and mitigate CVE-2021-44228 (Log4j vulnerability) on Windows systems.
+        This PowerShell script serves to detect and mitigate CVE-2021-44228 (Log4j vulnerability) on Windows systems with Sitecore installed.
     .PARAMETER DriveLetter
         The drive letter containing the target file to be modified. Note that if no drive letter is passed, all drives are searched.
     .PARAMETER RestartService
